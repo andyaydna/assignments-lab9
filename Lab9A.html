@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="eng">
+        <head>
+                <title>Lab 9A</title>
+        </head>
+
+        <body>
+
+            <p>How many buttons to create?</p>
+            <input type="text" id="user_input"> 
+            <input type="button" id="buttonID" value="Go!">
+            <p id=five_to_hundred></p>
+
+            <script>
+
+                document.getElementById("buttonID").onclick = button_press
+
+                function button_press() {
+                    let answer = document.getElementById("user_input").value
+                    if (answer >= 5 && answer <= 100) {
+                        make_buttons(answer)
+                    } 
+                    else {
+                        document.getElementById("five_to_hundred").innerHTML = "enter a number between 5 and 100"
+                    }
+                }
+
+                let arrayButtons = [];
+                function Button(width, height, top, left, order) {
+                    this.order=order;
+                    this.btn = document.createElement("button");
+                    this.btn.style.width = width;
+                    this.btn.style.height = height;
+                    this.btn.style.position = "absolute";
+                    document.body.appendChild(this.btn);
+                    this.setLocation = function (top, left) {
+                        this.btn.style.top = top;
+                        this.btn.style.left = left;
+                    }
+                    this.setLocation(top, left);
+                }
+
+                function make_buttons(answer) {
+                    for (i = 0; i < answer; i++) {
+                        arrayButtons.push(new Button("120px", "60px", Math.floor(Math.random() * height) + 'px', Math.floor(Math.random() * width) + 'px', i))}}
+                            
+                function move () {
+                    for (i = 0; i <= arrayButtons.length; i++) {
+                        arrayButtons[i].setLocation(
+                            Math.floor(Math.random() * height) + "px",
+                            Math.floor(Math.random() * width) + "px");
+                    }
+                }
+                function dimensions() {
+                    width = window.innerWidth - 200
+                    height = window.innerHeight - 200
+                } 
+            
+                setInterval(dimensions, 1)
+                setInterval(move, 2000)
+            </script>
+        </body>
+</html>
